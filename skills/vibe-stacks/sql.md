@@ -19,7 +19,7 @@
 ## Review checks
 
 - **Critical:** query built by string concatenation with user input (including `ORDER BY`/column names — whitelist them); migration that drops/renames a column still read by running code; destructive migration with no backup/rollback plan.
-- Migration locks a large table (non-concurrent index, column type change, `NOT NULL` without default on Postgres < 11 / MySQL older versions).
+- Migration locks a large table (non-concurrent index, column type change, adding a column with a default on Postgres < 11 / older MySQL rewrites the table; `SET NOT NULL` on a large table scans it under lock — add a `CHECK … NOT VALID` constraint and validate it first).
 - N+1 queries: loop of single-row queries — use a join, `IN (...)`, or the ORM's eager loading.
 - `SELECT *` on wide tables in hot paths; unbounded queries without `LIMIT`.
 - New `WHERE`/`JOIN` column with no index — ask for `EXPLAIN` on large tables.

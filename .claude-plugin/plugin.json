@@ -1,6 +1,6 @@
 {
   "name": "vibe-coding-skills",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "End-to-end vibe coding workflow: read codebase → plan → dev → test → code review → UI/UX audit.",
   "author": {
     "name": "Kelvin Ward",

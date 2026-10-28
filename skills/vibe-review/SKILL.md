@@ -19,7 +19,7 @@ Output: `.vibe/REVIEW.md`.
 1. **Context** — what is the change meant to do? Which acceptance criteria? Anything built that wasn't asked?
 2. **Size check** — ~100 changed lines good, ~300 OK if one logical change, ~1000 → recommend splitting (stack, by file group, or vertical slices). Refactors mixed with features → flag.
 3. **Tests first** — read `.vibe/TEST-REPORT.md` if present, then check it holds up: do tests exist at the levels the plan named, assert behavior (not implementation), cover edge cases and *Review focus* items? Is diff coverage met?
-   **Mutation check:** invert one condition the change adds, run the suite, restore the file. Still green → name the missing test. Missing tests are **Required**, not Optional.
+   **Mutation check:** don't edit source files here — `vibe-test` runs mutations. Check that the report's *Mutation check* line is plausible (core rules of the change were mutated, mutants caught). Missing or implausible → name the missing test. Missing tests are **Required**, not Optional.
 4. **Five axes**, per changed file:
    - **Correctness** — spec match, edge cases (empty/null/huge/concurrent), error paths, off-by-one, async/await, race conditions, broken callers of changed functions.
    - **Readability** — clear names, straight control flow, no needless cleverness. Abstractions earn their complexity. A new conditional bolted onto an unrelated flow = design smell.
