@@ -1,0 +1,13 @@
+{
+  "name": "vibe-coding-skills",
+  "owner": {
+    "name": "Anh Phi"
+  },
+  "plugins": [
+    {
+      "name": "vibe-coding-skills",
+      "source": "./",
+      "description": "End-to-end vibe coding workflow: read codebase → plan → dev → test → code review → UI/UX audit."
+    }
+  ]
+}
