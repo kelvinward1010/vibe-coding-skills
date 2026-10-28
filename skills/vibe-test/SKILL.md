@@ -12,7 +12,7 @@ Output: new/updated tests + `.vibe/TEST-REPORT.md`.
 
 ## 0. Test setup
 
-Use the project's existing test stack (from CONTEXT.md). If a level is missing entirely (e.g. no e2e runner), propose the conventional tool for the stack (Vitest/Jest, Pytest, PHPUnit, Go test, Playwright…) and **ask before adding it** — it's a new dependency.
+Use the project's existing test stack (from CONTEXT.md), and follow the *Testing* section of the matching packs in the `vibe-stacks` skill. If a level is missing entirely (e.g. no e2e runner), propose the conventional tool for the stack (Vitest/Jest, Pytest, PHPUnit, Go test, Playwright…) and **ask before adding it** — it's a new dependency.
 
 ## 1. Build the test matrix
 
@@ -51,7 +51,7 @@ Skip a dimension only if it truly can't apply, and say why in the report.
 ## 4. Measure
 
 1. **Run the full suite** — all green, quote the output.
-2. **Diff coverage** — run coverage and check the *changed* lines/branches: target **≥ 90% lines, ≥ 80% branches** on changed code (or the project's own threshold if stricter). Don't chase 100% on trivial code; every uncovered changed branch must be either tested or explained.
+2. **Diff coverage** — run coverage and check the *changed* lines/branches: target **≥ 90% lines, ≥ 80% branches** on changed code (or the *Coverage* value in the `## Vibe` section of CLAUDE.md, or the project's own threshold if stricter). Don't chase 100% on trivial code; every uncovered changed branch must be either tested or explained. *Coverage: none* (no coverage tool for the language, e.g. GDScript) → skip the % and rely on the test matrix + mutation check; say so in the report.
 3. **Mutation check** — for each core rule, invert a condition / change a boundary / delete a line, run the relevant tests, restore. Tests still green → a test is missing; write it.
 4. **Flakiness** — run new/changed tests 3× (or with `--repeat`/shuffle if supported). Any inconsistency → fix the cause, never retry-to-green.
 

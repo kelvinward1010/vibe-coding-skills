@@ -10,7 +10,8 @@ Goal: produce `.vibe/CONTEXT.md`, a compact map that lets the planner work witho
 ## Steps
 
 1. **Identify the stack.** Read manifests (`package.json`, `pyproject.toml`, `go.mod`, `Cargo.toml`, `composer.json`, …), lockfiles, framework configs, `README`, `CLAUDE.md`, `AGENTS.md`, `.env.example`.
-2. **Find the commands.** How to install, run dev server, build, lint, typecheck, test. Verify by reading scripts — don't guess.
+   If `CLAUDE.md` has a `## Vibe` section (written by `vibe-init`), start from it. Record the matching packs from the `vibe-stacks` skill (listed in the config, or matched from the detected stack) under *Stack* in CONTEXT.md so later stages load them.
+2. **Find the commands.** How to install, run dev server, build, lint, typecheck, test. Verify by reading scripts — don't guess. If the `## Vibe` commands are out of date, say so and suggest re-running `vibe-init`.
 3. **Map the structure.** Top-level folders and what each owns. Entry points, routing, data layer, state management, UI component library, styling system.
 4. **Extract conventions.** Naming, file layout, error handling, API call pattern, test style, commit style. Quote 1 short example file path for each.
 5. **Zoom into the task.** If the user gave a task, locate every file likely touched: grep for related names, follow imports one or two levels. List them with one line on why each matters.

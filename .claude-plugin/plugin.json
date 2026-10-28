@@ -1,10 +1,10 @@
 {
   "name": "vibe-coding-skills",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "End-to-end vibe coding workflow: read codebase → plan → dev → test → code review → UI/UX audit.",
   "author": {
-    "name": "Anh Phi",
-    "email": "anh.phi@blueoc.tech"
+    "name": "Kelvin Ward",
+    "email": "kelvinward1010@gmail.com"
   },
   "license": "MIT",
   "keywords": ["vibe-coding", "planning", "testing", "code-review", "uiux", "workflow"]

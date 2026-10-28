@@ -10,7 +10,9 @@ Output: `.vibe/REVIEW.md`.
 
 **Approval bar:** approve when the change clearly improves code health and follows project conventions — even if you'd have written it differently.
 
-**Fresh eyes:** if you wrote the code in this session, run the review in a fresh subagent given only the diff, PLAN.md, and CONTEXT.md. Authors miss their own assumptions.
+**Fresh eyes:** if you wrote the code in this session, run the review in a fresh subagent given only the diff, PLAN.md, CONTEXT.md, and the `## Vibe` section of CLAUDE.md. Authors miss their own assumptions.
+
+**Project rules:** every *Team rules* item in the `## Vibe` section is a review check; a violation is at least Required. Any edit inside an *Off-limits* path is Critical. Load the stack packs named in CONTEXT.md or the `## Vibe` section from the `vibe-stacks` skill and apply their *Review checks* to the files of that stack.
 
 ## Process
 

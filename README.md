@@ -15,6 +15,7 @@ Mỗi bước ghi kết quả vào thư mục `.vibe/` trong project, bước sa
 
 | Skill | Dùng khi | Output |
 |-------|----------|--------|
+| `vibe-init` | Setup 1 lần cho mỗi project | mục `## Vibe` trong `CLAUDE.md` |
 | `vibe-flow` | Chạy cả pipeline cho 1 feature | tất cả bên dưới |
 | `vibe-read` | Đọc & map codebase | `.vibe/CONTEXT.md` |
 | `vibe-plan` | Lên plan, chia task, acceptance criteria | `.vibe/PLAN.md` |
@@ -22,28 +23,48 @@ Mỗi bước ghi kết quả vào thư mục `.vibe/` trong project, bước sa
 | `vibe-test` | Test đầy đủ: unit / integration / e2e, edge case, coverage, mutation, flaky | test + `.vibe/TEST-REPORT.md` |
 | `vibe-review` | Review bug, security, perf, test | `.vibe/REVIEW.md` |
 | `vibe-uiux-audit` | Audit UX, a11y (WCAG 2.2 AA), responsive | `.vibe/UIUX-AUDIT.md` |
+| `vibe-stacks` | Rule theo stack, các skill khác tự nạp | — |
+
+**Stack pack có sẵn:** React/Next.js, Vue/Nuxt, NestJS, FastAPI, Go, PostgreSQL/MySQL, MongoDB, Unity 6 (URP), Godot 4.
 
 ## Cài đặt
 
-**Từ GitHub (sau khi push):**
+**Từ GitHub (khuyên dùng — cài 1 lần, mọi project đều có):**
 
 ```bash
-/plugin marketplace add <github-user>/vibe-coding-skills
+/plugin marketplace add kelvinward1010/vibe-coding-skills
 /plugin install vibe-coding-skills@vibe-coding-skills
 ```
 
-**Local để test:**
+**Local để test khi đang sửa skill:**
 
 ```bash
-/plugin marketplace add /home/duydao/Desktop/TII/vibe-coding-skills
+/plugin marketplace add <đường-dẫn-tới>/vibe-coding-skills
 /plugin install vibe-coding-skills@vibe-coding-skills
 ```
 
-Hoặc copy thẳng từng skill vào `~/.claude/skills/` (dùng mọi project) hoặc `<project>/.claude/skills/`.
+Không nên copy skill vào từng project — mỗi project sẽ giữ một bản khác nhau và không cập nhật được.
+
+## Dùng làm base cho nhiều dự án
+
+Bộ skill chỉ chứa phần **chung**. Phần **riêng** của từng project nằm trong `CLAUDE.md` của project đó:
+
+| Lớp | Nằm ở | Chứa gì |
+|---|---|---|
+| Base | repo này | Quy trình 6 bước, chuẩn test, checklist review |
+| Stack pack | `skills/vibe-stacks/<stack>.md` | Rule riêng cho Next.js, FastAPI, Go… — chỉ đọc khi project dùng stack đó |
+| Project | mục `## Vibe` trong `CLAUDE.md` của project | Loại project, lệnh chạy/test, bước nào áp dụng, ngưỡng coverage, team rules, thư mục cấm sửa |
+
+Project mới: chạy `/vibe-init` một lần. Các skill khác đọc mục `## Vibe` và để nó ghi đè mặc định (vd project `api` tự bỏ bước UI/UX audit).
+
+**Game:** `vibe-init` có loại project `game`. Quy trình giữ nguyên, nhưng bỏ UI/UX audit web (thay bằng checklist playtest), unit test cho logic game, coverage không tính code render/scene, review chú ý ngân sách mỗi frame.
+
+Cập nhật base: sửa skill → tăng `version` trong `.claude-plugin/plugin.json` → push → các máy chạy `/plugin marketplace update`.
 
 ## Cách dùng
 
 ```
+/vibe-init
 /vibe-flow thêm trang quản lý ứng viên có filter theo trạng thái
 /vibe-read
 /vibe-plan sửa bug login bị logout sau 5 phút
@@ -62,15 +83,19 @@ vibe-coding-skills/
 │   ├── plugin.json
 │   └── marketplace.json
 ├── skills/
+│   ├── vibe-init/SKILL.md
 │   ├── vibe-flow/SKILL.md
 │   ├── vibe-read/SKILL.md
 │   ├── vibe-plan/SKILL.md
 │   ├── vibe-dev/SKILL.md
 │   ├── vibe-test/SKILL.md
 │   ├── vibe-review/SKILL.md
-│   └── vibe-uiux-audit/
-│       ├── SKILL.md
-│       └── references/web-interface-rules.md
+│   ├── vibe-uiux-audit/
+│   │   ├── SKILL.md
+│   │   └── references/web-interface-rules.md
+│   └── vibe-stacks/
+│       ├── SKILL.md              # bảng chọn pack
+│       └── <stack>.md            # react-nextjs, vue, nestjs, fastapi, go, sql, mongodb, unity, godot
 └── README.md
 ```
 
@@ -103,5 +128,6 @@ Cả ba repo đều dùng license MIT.
 
 ## Tuỳ biến
 
-- Sửa checklist trong từng `SKILL.md` cho hợp stack/team (vd thêm rule riêng cho Next.js, Laravel…).
+- Rule riêng của 1 project → mục `## Vibe` trong `CLAUDE.md` của project đó, không sửa base.
+- Rule cho cả 1 stack → thêm `skills/vibe-stacks/<stack>.md` (4 mục: Applies when, Dev, Review checks, Testing) và 1 dòng vào bảng trong `vibe-stacks/SKILL.md`.
 - Thêm file tham khảo cạnh `SKILL.md` (vd `skills/vibe-review/security-checklist.md`) và nhắc tới nó trong SKILL.md — Claude chỉ đọc khi cần.

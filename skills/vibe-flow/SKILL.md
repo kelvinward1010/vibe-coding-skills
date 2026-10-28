@@ -16,6 +16,10 @@ Runs the six stages in order. Each stage writes one file into `.vibe/` at the pr
 | 5 | Review | `vibe-review` | `.vibe/REVIEW.md` |
 | 6 | UI/UX audit | `vibe-uiux-audit` | `.vibe/UIUX-AUDIT.md` (skip if no UI change) |
 
+## Project config
+
+Read the `## Vibe` section of the project's `CLAUDE.md` first. Its *Stages*, *Test levels*, *Coverage*, *Team rules* and *Off-limits* override the defaults in every stage. Load each pack listed under *Stack packs* from the `vibe-stacks` skill and pass it to every stage (Dev section to plan/dev, Testing to test, Review checks to review). No section → suggest running `vibe-init` once (one line, don't block), then continue with defaults.
+
 ## Pick the track first
 
 | Track | When | Stages |
@@ -32,7 +36,7 @@ State the track you picked in one line. If a Quick task grows, stop and switch t
 2. **Resume, don't restart.** If `.vibe/` files exist, read them and continue from the first unfinished stage. Ask before overwriting an existing `PLAN.md`.
 3. **Loop on findings.** A bug found in Test, Critical/Required in Review, or High in Audit → back to Dev, fix, re-run Test, then re-run that stage once. Report anything still open.
 4. **Fresh eyes for review.** Run stages 5–6 in a fresh subagent when the same session wrote the code.
-5. **Skip what doesn't apply.** No UI touched → skip stage 6 and the e2e part of stage 4, and say so.
+5. **Skip what doesn't apply.** Stage not listed in the config's *Stages*, or no UI touched → skip stage 6 and the e2e part of stage 4, and say so.
 6. Add `.vibe/` to `.gitignore` unless the user wants these files committed.
 
 ## Final report

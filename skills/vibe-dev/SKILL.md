@@ -5,7 +5,7 @@ description: Implement an approved plan task by task — test-first, matching pr
 
 # Vibe Dev — build it, prove it
 
-Input: `.vibe/PLAN.md` (approved) + `.vibe/CONTEXT.md`.
+Input: `.vibe/PLAN.md` (approved) + `.vibe/CONTEXT.md` + the *Dev* section of the stack packs named there (`vibe-stacks` skill).
 
 ## Loop, per task
 
