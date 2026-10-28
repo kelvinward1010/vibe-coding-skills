@@ -52,7 +52,7 @@ Skip a dimension only if it truly can't apply, and say why in the report.
 
 1. **Run the full suite** — all green, quote the output.
 2. **Diff coverage** — run coverage and check the *changed* lines/branches: target **≥ 90% lines, ≥ 80% branches** on changed code (or the *Coverage* value in the `## Vibe` section of CLAUDE.md, or the project's own threshold if stricter). Don't chase 100% on trivial code; every uncovered changed branch must be either tested or explained. *Coverage: none* (no coverage tool for the language, e.g. GDScript) → skip the % and rely on the test matrix + mutation check; say so in the report.
-3. **Mutation check** — for each core rule, invert a condition / change a boundary / delete a line, run the relevant tests, restore. Tests still green → a test is missing; write it.
+3. **Mutation check** — for each core rule, invert a condition / change a boundary / delete a line, run the relevant tests, restore. One mutant at a time; after each restore, confirm the file is back to its pre-mutation state (`git diff` on that file, or re-read it) before the next. Tests still green → a test is missing; write it.
 4. **Flakiness** — run new/changed tests 3× (or with `--repeat`/shuffle if supported). Any inconsistency → fix the cause, never retry-to-green.
 
 ## Rules

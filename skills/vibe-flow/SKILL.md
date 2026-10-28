@@ -33,10 +33,12 @@ State the track you picked in one line. If a Quick task grows, stop and switch t
 ## Rules
 
 1. **Gate after Plan.** Show the plan summary and wait for approval before stage 3. Everything else runs without stopping unless something is ambiguous or risky.
-2. **Resume, don't restart.** If `.vibe/` files exist, read them and continue from the first unfinished stage. Ask before overwriting an existing `PLAN.md`.
+2. **Resume, don't restart.** If `.vibe/` files exist, first check they belong to this request: compare the `# Plan — <feature>` title with what the user asked. Same feature → read them and continue from the first unfinished stage. Different feature → move the old files to `.vibe/archive/<date>-<slug>/` and start again from Read (re-run the baseline only if the code changed since). Ask before overwriting an existing `PLAN.md`.
 3. **Loop on findings.** A bug found in Test, Critical/Required in Review, or High in Audit → back to Dev, fix, re-run Test, then re-run that stage once. Report anything still open.
 4. **Fresh eyes for review.** Run stages 5–6 in a fresh subagent when the same session wrote the code.
-5. **Skip what doesn't apply.** Stage not listed in the config's *Stages*, or no UI touched → skip stage 6 and the e2e part of stage 4, and say so.
+5. **Skip what doesn't apply, and say so.**
+   - Stage not listed in the config's *Stages* → skip that stage.
+   - No UI touched → skip stage 6 and the browser e2e part of stage 4.
 6. Add `.vibe/` to `.gitignore` unless the user wants these files committed.
 
 ## Final report

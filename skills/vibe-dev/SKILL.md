@@ -7,6 +7,8 @@ description: Implement an approved plan task by task — test-first, matching pr
 
 Input: `.vibe/PLAN.md` (approved) + `.vibe/CONTEXT.md` + the *Dev* section of the stack packs named there (`vibe-stacks` skill).
 
+**Quick track** (from `vibe-flow`): there is no PLAN.md — the user's request is the only task. Still run Red → Green → Verify; just skip the Tick step.
+
 ## Loop, per task
 
 1. **Read** every file the task touches before editing it.
@@ -33,7 +35,7 @@ Before claiming anything works, is fixed, passes, or is done:
 | Build OK | Build command exit 0 (lint passing ≠ build passing) |
 | Bug fixed | Test reproducing the original symptom now passes |
 | Requirement met | Each acceptance criterion checked line by line |
-| Subagent finished | `git diff` shows the change + tests ran |
+| Subagent finished | `git diff` shows the change (no git → list the changed files and read them) + tests ran |
 
 **Red flags — stop and run the check:** "should work", "probably", "seems to", feeling done, about to commit, trusting a report you didn't verify.
 

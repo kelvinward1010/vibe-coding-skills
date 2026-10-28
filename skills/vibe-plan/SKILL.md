@@ -73,7 +73,7 @@ Interfaces: consumes `X`, produces `fooBar(id: string): Promise<Foo>`
 - [ ] Run `<cmd>` → expect FAIL: <reason>
 - [ ] Implement: <exact change>
 - [ ] Run `<cmd>` → expect PASS
-- [ ] Commit-sized checkpoint
+- [ ] Checkpoint: diff ≈ one commit (don't commit unless the user asks)
 
 ### T2 — ...
 
